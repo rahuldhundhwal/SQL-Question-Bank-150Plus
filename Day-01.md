@@ -103,54 +103,73 @@ where salary > (select salary from employee where id= e.managerid)
 ```
 ## 🧩 Question 7
 
-**Title:** Salaries Differences  
-**Link:** [🔗 Click to Open Problem](https://platform.stratascratch.com/coding/10308-salaries-differences?code_type=3)  
-**Platform:** StrataScratch  
+**Title:** Duplicate Emails  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/duplicate-emails/)  
+**Platform:** LeetCode 
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
-SELECT
-  abs((SELECT MAX(salary) FROM db_employee WHERE department_id = 4) - 
-  (SELECT MAX(salary) FROM db_employee WHERE department_id = 1)) AS salary_difference;
+# Write your MySQL query statement below
+select distinct Email from person p where (select count(email) from person where email=p.email)>1
 ```
 ## 🧩 Question 8
 
-**Title:** Find Customer Referee  
-**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/find-customer-referee/description/)  
+**Title:** Department Highest Salary  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/department-highest-salary/)  
 **Platform:** LeetCode 
-**Difficulty:** Easy  
+**Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
-select
-    name from customer
-    where referee_id <>2 or referee_id is null
+select d.name as Department,
+       e.name as Employee,
+       e.salary as Salary
+from   employee e join department d on e.departmentID=d.id
+where e.salary = (select max(salary) from employee where departmentID=e.departmentID)
 ```
 ## 🧩 Question 9
 
-**Title:** Salaries Differences  
-**Link:** [🔗 Click to Open Problem](https://platform.stratascratch.com/coding/10308-salaries-differences?code_type=3)  
-**Platform:** StrataScratch  
+**Title:** Department Top Three salaries  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/department-top-three-salaries/solutions/5367303/easiest-basic-sql-solution-3-approaches-beginner-level-to-advance/)  
+**Platform:** LeetCode  
+**Difficulty:** Hard  
+
+```sql
+MySQL Solution: 
+SELECT
+    d.name AS Department,
+    e.name AS Employee,
+    e.salary AS Salary
+FROM
+    Employee e
+    JOIN Department d ON e.departmentId = d.id
+WHERE
+    (
+        SELECT COUNT(DISTINCT salary)
+        FROM Employee e2
+        WHERE e2.departmentId = e.departmentId AND e2.salary >= e.salary
+    ) <= 3
+ORDER BY
+    Department, Salary DESC;
+```
+## 🧩 Question 10
+
+**Title:** Rising Temperature  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/rising-temperature/description/)  
+**Platform:** LeetCode 
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
 SELECT
-  abs((SELECT MAX(salary) FROM db_employee WHERE department_id = 4) - 
-  (SELECT MAX(salary) FROM db_employee WHERE department_id = 1)) AS salary_difference;
-```
-## 🧩 Question 10
+  w1.id
+FROM
+  Weather AS w1
+JOIN
+  Weather AS w2 ON DATEDIFF(w1.recordDate, w2.recordDate) = 1
+WHERE
+  w1.temperature > w2.temperature;
 
-**Title:** Find Customer Referee  
-**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/find-customer-referee/description/)  
-**Platform:** LeetCode 
-**Difficulty:** Easy  
-
-```sql
-MySQL Solution: 
-select
-    name from customer
-    where referee_id <>2 or referee_id is null
 ```
 

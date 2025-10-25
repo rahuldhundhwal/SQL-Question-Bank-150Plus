@@ -34,28 +34,28 @@ The goal is to solve **150+ real-world and interview-standard SQL problems** acr
 Below I’ll log **each day’s topic, date, and questions** I solve.  
 Each question will include a **title, source, difficulty, and short note**.
 
-| Day | Date | Focus / Topic | # Questions | Questions Solved & Notes | Status |
-|-----|------|----------------|--------------|----------------------------|---------|
-| 1 |  | SELECT, WHERE, ORDER BY |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 2 |  | Aggregate Functions (SUM, AVG, COUNT) + GROUP BY |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 3 |  | HAVING + Filtering Aggregations |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 4 |  | Joins (INNER, LEFT, RIGHT, FULL) |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 5 |  | Advanced Joins + Self Joins + Cross Joins |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 6 |  | Subqueries (Scalar, Correlated, Nested) |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 7 |  | Common Table Expressions (CTEs) |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 8 |  | Window Functions (ROW_NUMBER, RANK, DENSE_RANK) |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 9 |  | Aggregate + Window Combination |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 10 |  | Conditional Logic (CASE, IF, COALESCE) |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 11 |  | String Functions & Pattern Matching (LIKE, REGEXP) |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 12 |  | Date & Time Functions |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 13 |  | Data Cleaning & Transformation Queries |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 14 |  | Real-World E-Commerce Analytics |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 15 |  | Marketing, Sales & Finance Case Queries |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 16 |  | HR Analytics & Employee Performance Queries |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 17 |  | Mock Interview Questions (Company Based) |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 18 |  | SQL + Power BI Integration Queries |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 19 |  | Optimization & Query Performance |  | **Questions:** <br> 1.  <br> 2.  <br> 3.  | ☐ |
-| 20 |  | Revision + Final Review |  | **Summary:**  | ☐ |
+| Day | Date | # Questions |  Status |
+|-----|------|--------------|---------|
+| 01 |  |  | ☐ |
+| 02 |  |  | ☐ |
+| 03 |  |  | ☐ |
+| 04 |  |  | ☐ |
+| 05 |  |  | ☐ |
+| 06 |  |  | ☐ |
+| 07 |  |  | ☐ |
+| 08 |  |  | ☐ |
+| 09 |  |  | ☐ |
+| 10 |  |  | ☐ |
+| 11 |  |  | ☐ |
+| 12 |  |  | ☐ |
+| 13 |  |  | ☐ |
+| 14 |  |  | ☐ |
+| 15 |  |  | ☐ |
+| 16 |  |  | ☐ |
+| 17 |  |  | ☐ |
+| 18 |  |  | ☐ |
+| 19 |  |  | ☐ |
+| 20 |  |  | ☐ |
 
 ✅ **Legend:**  
 ☐ = Pending  ✅ = Completed  ⚠️ = Partial

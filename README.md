@@ -36,8 +36,8 @@ Each question will include a **title, source, difficulty, and short note**.
 
 | Day | Date | # Questions |  Status |
 |-----|------|--------------|---------|
-| 01 |  |  | ☐ |
-| 02 |  |  | ☐ |
+| 01 | 25/10/2025 | 10 | ✅ |
+| 02 | 26/10/2025 | 10 | ✅ |
 | 03 |  |  | ☐ |
 | 04 |  |  | ☐ |
 | 05 |  |  | ☐ |

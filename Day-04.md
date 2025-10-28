@@ -116,60 +116,99 @@ select round((
 ```
 ## 🧩 Question 6
 
-**Title:** Biggest Single Num  
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
+**Title:** Page With No Likes
+Facebook SQL Interview Question  
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/sql-page-with-no-likes)  
+**Platform:** Daatlemur  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
-
+select page_id 
+from pages
+where page_id not  in
+    (select page_id
+    from page_likes p
+    where 0 < (select COALESCE(count(user_id),0)
+                from page_likes
+                where  p.page_id= page_id))
 ```
 ## 🧩 Question 7
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
-**Difficulty:** Medium  
-
-```sql
-MySQL Solution: 
-
-
-```
-## 🧩 Question 8
-
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
-**Difficulty:** Medium  
-
-```sql
-MySQL Solution: 
-
-```
-## 🧩 Question 9
-
-**Title:** 
-Uber SQL Interview Question  
-**Link:** [🔗 Click to Open Problem]()  
+**Title:**Second Highest Salary
+FAANG SQL Interview Question   
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/sql-second-highest-salary)  
 **Platform:** Datalemur  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+select max(salary)as second_highest_salary
+from Employee
+where salary <(
+    select max(salary)
+    from employee
+  )
+
+```
+## 🧩 Question 8
+
+**Title:** Top Three Salaries
+FAANG SQL Interview Question   
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/sql-top-three-salaries)  
+**Platform:** Datalemur  
+**Difficulty:** Medium  
+
+```sql
+MySQL Solution: 
+select d.department_name,
+      e.NAME,
+      e.salary
+  from  department d  
+  join employee e
+  on e.department_id=d.department_id
+where salary in (select distinct salary 
+                  from employee 
+                  where department_id =d.department_id
+                  order by salary desc limit 3 )
+order by department_name asc,salary desc,name asc
+```
+## 🧩 Question 9
+
+**Title:** Average Post Hiatus (Part 1)
+Facebook SQL Interview Question  
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/sql-average-post-hiatus-1)  
+**Platform:** Datalemur  
+**Difficulty:** Easy  
+
+```sql
+MySQL Solution: 
+SELECT
+  DISTINCT user_id,
+  DATEDIFF(MAX(post_date), MIN(post_date)) AS days_between
+FROM
+  posts
+  where year(post_date)='2021'
+GROUP BY
+  user_id
+having days_between>0
 
 ```
 ## 🧩 Question 10
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Pharmacy Analytics (Part 1)
+CVS Health SQL Interview Question  
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/top-profitable-drugs)  
 **Platform:** DataLemur  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
-
+select  drug,
+  (total_sales - cogs) as total_profit
+from pharmacy_sales
+order by total_profit desc
+Limit 3
 
 ```
 

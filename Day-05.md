@@ -114,7 +114,7 @@ order by product_id;
 ```
 ## 🧩 Question 5
 
-**Title:** Count Salary Categories 
+**Title:** Count Salary Categories   
 **Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/count-salary-categories/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium 
@@ -145,60 +145,110 @@ group by category) as rt on lt.category=rt.category
 ```
 ## 🧩 Question 6
 
-**Title:** Biggest Single Num  
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
-**Difficulty:** Easy  
-
-```sql
-MySQL Solution: 
-
-```
-## 🧩 Question 7
-
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
-**Difficulty:** Medium  
-
-```sql
-MySQL Solution: 
-
-
-```
-## 🧩 Question 8
-
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
-**Difficulty:** Medium  
-
-```sql
-MySQL Solution: 
-
-```
-## 🧩 Question 9
-
-**Title:** 
-Uber SQL Interview Question  
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** Datalemur  
-**Difficulty:** Medium  
-
-```sql
-MySQL Solution: 
-
-```
-## 🧩 Question 10
-
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Teams Power Users
+Microsoft SQL Interview Question  
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/teams-power-users)  
 **Platform:** DataLemur  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
+select sender_id,
+       count(message_id) as message_count
+from messages
+where sent_date between '2022-08-01' and '2022-08-31'
+group by sender_id
+order by message_count desc
+limit 2
+       
+```
+## 🧩 Question 7
 
+**Title:**Laptop vs. Mobile Viewership
+NY Times SQL Interview Question   
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/laptop-mobile-viewership)  
+**Platform:** DataLemur  
+**Difficulty:** Easy  
+
+```sql
+MySQL Solution: 
+SELECT
+    COUNT(CASE WHEN device_type = 'laptop' THEN user_id END) AS laptop_views,
+    COUNT(CASE WHEN device_type IN ('tablet', 'phone') THEN user_id END) AS mobile_views
+FROM
+    viewership;
+
+```
+## 🧩 Question 8
+
+**Title:** Duplicate Job Listings
+LinkedIn SQL Interview Question  
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/duplicate-job-listings)  
+**Platform:** DataLemur  
+**Difficulty:** Easy  
+
+```sql
+MySQL Solution: 
+select
+  count(distinct c1.company_id) as duplicate_companies
+from 
+  job_listings c1
+join 
+  job_listings c2
+on 
+  c1.company_id = c2.company_id
+and 
+  c1.job_id <> c2.job_id
+where c1.title= c2.title and c1.description=c2.description
+```
+## 🧩 Question 9
+
+**Title:**Data Science Skills
+LinkedIn SQL Interview Question   
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/matching-skills)  
+**Platform:** Datalemur  
+**Difficulty:** Easy  
+
+```sql
+MySQL Solution: 
+select distinct c1.candidate_id 
+from candidates c1 
+join candidates c2
+on c1. candidate_id =c2.candidate_id 
+and c1.skill<>c2.skill
+join candidates c3
+on c1. candidate_id =c3.candidate_id 
+and c1.skill<>c3.skill and c2.skill<>c3.skill
+where c1.skill in ('Python', 'Tableau', 'PostgreSQL') and 
+c2.skill in ('Python', 'Tableau', 'PostgreSQL') and
+c3.skill in ('Python', 'Tableau', 'PostgreSQL')
+-----------------------------------------
+SELECT candidate_id
+FROM candidates
+WHERE skill IN ('Python', 'Tableau', 'PostgreSQL')
+GROUP BY candidate_id
+HAVING COUNT(skill) = 3
+ORDER BY candidate_id;
+```
+## 🧩 Question 10
+
+**Title:** Cities With Completed Trades
+Robinhood SQL Interview Question   
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/completed-trades)  
+**Platform:** DataLemur  
+**Difficulty:** Easy  
+
+```sql
+MySQL Solution: 
+SELECT u.city,
+  count(t.order_id) as total_orders
+from trades t join 
+users u 
+on t.user_id =u.user_id
+where t.status='Completed'
+group by city
+order by total_orders desc
+limit 3
 
 ```
 

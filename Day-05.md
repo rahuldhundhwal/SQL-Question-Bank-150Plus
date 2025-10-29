@@ -56,35 +56,91 @@ ORDER BY
 ```
 ## 🧩 Question 3
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:**Reformat Department Table   
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/reformat-department-table/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution:
+SELECT
+    id,
+    SUM(CASE WHEN month = 'Jan' THEN revenue ELSE null END) AS Jan_Revenue,
+    SUM(CASE WHEN month = 'Feb' THEN revenue ELSE null END) AS Feb_Revenue,
+    SUM(CASE WHEN month = 'Mar' THEN revenue ELSE null END) AS Mar_Revenue,
+    SUM(CASE WHEN month = 'Apr' THEN revenue ELSE null END) AS Apr_Revenue,
+    SUM(CASE WHEN month = 'May' THEN revenue ELSE null END) AS May_Revenue,
+    SUM(CASE WHEN month = 'Jun' THEN revenue ELSE null END) AS Jun_Revenue,
+    SUM(CASE WHEN month = 'Jul' THEN revenue ELSE null END) AS Jul_Revenue,
+    SUM(CASE WHEN month = 'Aug' THEN revenue ELSE null END) AS Aug_Revenue,
+    SUM(CASE WHEN month = 'Sep' THEN revenue ELSE null END) AS Sep_Revenue,
+    SUM(CASE WHEN month = 'Oct' THEN revenue ELSE null END) AS Oct_Revenue,
+    SUM(CASE WHEN month = 'Nov' THEN revenue ELSE null END) AS Nov_Revenue,
+    SUM(CASE WHEN month = 'Dec' THEN revenue ELSE null END) AS Dec_Revenue
+FROM
+    Department
+GROUP BY
+    id;
 
 ```
 ## 🧩 Question 4
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Product Price at a Given Date   
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/product-price-at-a-given-date/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium 
 
 ```sql
 MySQL Solution: 
-
+# Write your MySQL query statement below
+select distinct product_id,
+        coalesce(new_price,10) as price
+from Products p 
+where change_date = (
+    select max(change_date) 
+    from Products where 
+    product_id=p.product_id
+    and change_date <= '2019-08-16'
+)
+UNION
+SELECT DISTINCT product_id, 10 AS price
+FROM Products
+WHERE product_id NOT IN (
+    SELECT product_id
+    FROM Products
+    WHERE change_date <= '2019-08-16'
+)
+order by product_id;
 ```
 ## 🧩 Question 5
 
-**Title:** 
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Count Salary Categories 
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/count-salary-categories/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium 
 
 ```sql
 MySQL Solution: 
+# Write your MySQL query statement below
+select 
+    lt.category,
+    coalesce(rt.accounts_count,0) as accounts_count
+from
+(
+    SELECT 'Low Salary' AS category
+    UNION ALL SELECT 'Average Salary'
+    UNION ALL SELECT 'High Salary'
+) as lt
+left join
+(select 
+case 
+    when income<20000 then "Low Salary"
+    when income between 20000 and 50000 then "Average Salary"
+    when income>50000 then "High Salary"
+    end as category,
+    coalesce(count(account_id),0) as accounts_count
+from Accounts
+group by category) as rt on lt.category=rt.category
 
 ```
 ## 🧩 Question 6

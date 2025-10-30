@@ -106,37 +106,66 @@ HAVING
 ```
 ## 🧩 Question 6
 
-**Title:** Biggest Single Num  
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Article Views I  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/article-views-i/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
+# Write your MySQL query statement below
+select distinct a.author_id as id 
+from views a join views b 
+on a.author_id =b.author_id
+and a.author_id=b.viewer_id
+order by id
 
 ```
 ## 🧩 Question 7
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:**  Queries Quality and Percentage  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/queries-quality-and-percentage/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+# Write your MySQL query statement below
+select 
+  query_name, 
+  Round(avg(rating / position),2) as quality, 
+  round(((
+        select count(query_name) 
+        from  Queries 
+        where rating < 3 
+        and query_name = q.query_name
+      )/(
+        select count(query_name) 
+        from Queries 
+        where query_name = q.query_name
+      ) * 100
+    ),2) as poor_query_percentage 
+from Queries q 
+group by query_name
 
 
 ```
 ## 🧩 Question 8
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Average Selling Price  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/average-selling-price/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
-
+# Write your MySQL query statement below
+select p.product_id,
+    ifnull(round(sum(p.price*u.units)/sum(u.units),2),0) as average_price
+from Prices p left join unitssold u 
+on p.product_id=u.product_id 
+and  u.purchase_date between p.start_date and p.end_date
+group by p.product_id
 ```
 ## 🧩 Question 9
 

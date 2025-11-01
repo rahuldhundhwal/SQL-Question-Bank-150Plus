@@ -30,13 +30,43 @@ order by user_id asc
 ```
 ## 🧩 Question 2
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Seasonal Sales Analysis  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/seasonal-sales-analysis/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+# Write your MySQL query statement below
+with season_products as (
+    select 
+    case 
+        when extract(month from sale_date) in (12,1,2) then "Winter"
+        when extract(month from sale_date) in (3,4,5) then "Spring"
+        when extract(month from sale_date) in (6,7,8) then "Summer"
+        when extract(month from sale_date) in (9,10,11) then "Fall"
+    end as season,
+        p.category,
+        sum(s.quantity) as total_quantity,
+        sum(quantity*price) as total_revenue
+
+    from sales s join products p 
+    on p.product_id=s.product_id
+    group by season,p.category
+)
+
+select * 
+from season_products sp 
+where total_revenue =(
+    select max(total_revenue)
+    from season_products 
+    where season =sp.season and total_quantity =(
+        select max(total_quantity)
+        from season_products 
+        where season =sp.season
+)
+)
+order by season asc
 
 ```
 ## 🧩 Question 3
@@ -77,14 +107,18 @@ order by polarization_score desc , title desc
 ```
 ## 🧩 Question 4
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Find Products with Valid Serial Numbers  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/find-products-with-valid-serial-numbers/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium 
 
 ```sql
 MySQL Solution: 
-
+# Write your MySQL query statement below
+select * 
+from products
+where  regexp_like ( description,'\\bSN[0-9]{4}-[0-9]{4}\\b','c')
+order by product_id asc
 ```
 ## 🧩 Question 5
 

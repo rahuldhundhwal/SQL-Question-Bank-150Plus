@@ -169,25 +169,40 @@ group by p.product_id
 ```
 ## 🧩 Question 9
 
-**Title:**  
-**Link:** [🔗 Click to Open Problem]()  
+**Title:**Average Review Ratings
+Amazon SQL Interview Question  
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/sql-avg-review-ratings)  
 **Platform:** Datalemur  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
-
+select extract(MONTH FROM submit_date)  as mth,
+      product_ID as product,
+      round(avg(stars),2) as avg_stars
+from reviews 
+group by mth,product_id
+order by mth,product_ID
 ```
 ## 🧩 Question 10
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:**Well Paid Employees
+FAANG SQL Interview Question   
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/sql-well-paid-employees)  
 **Platform:** DataLemur  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
-
+select employee_id,
+      name as employee_name
+from employee e
+where salary>(
+      select salary 
+      from employee
+      where employee_id=e.manager_id
+      
+    )
 
 ```
 

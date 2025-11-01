@@ -32,7 +32,7 @@ The goal is to solve **150+ real-world and interview-standard SQL problems** acr
 ## 🗓️ Daily Progress Tracker
 
 Below I’ll log **each day’s topic, date, and questions** I solve.  
-Each question will include a **title, source, difficulty, and short note**.
+
 
 | Day | Date | # Questions |  Status |
 |-----|------|--------------|---------|

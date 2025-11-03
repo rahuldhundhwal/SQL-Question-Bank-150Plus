@@ -14,13 +14,19 @@
 
 ## 🧩 Question 1
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
+**Title:**Final Account Balance
+PayPal SQL Interview Question   
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/final-account-balance)  
+**Platform:** Datalemur  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
+select account_id,
+    sum(case when transaction_type= 'Deposit' then amount end)-
+    sum(case when transaction_type= 'Withdrawal' then amount end) as final_balance
+from TRANSACTIONs
+group by account_id
 
 ```
 ## 🧩 Question 2

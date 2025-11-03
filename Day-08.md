@@ -146,48 +146,83 @@ where char_length(content) >15
 ```
 ## 🧩 Question 7
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** The Latest Login in 2020  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/the-latest-login-in-2020/description/)  
 **Platform:** LeetCode  
-**Difficulty:** Medium  
-
-```sql
-MySQL Solution: 
-
-
-```
-## 🧩 Question 8
-
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
-**Difficulty:** Medium  
-
-```sql
-MySQL Solution: 
-
-```
-## 🧩 Question 9
-
-**Title:**  
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** Datalemur  
-**Difficulty:** Medium  
-
-```sql
-MySQL Solution: 
-
-```
-## 🧩 Question 10
-
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** DataLemur  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
+# Write your MySQL query statement below
+select 
+    user_id,
+    max(time_stamp) as last_stamp
+from Logins
+where year(time_stamp) = '2020'
+group by user_id
 
+```
+## 🧩 Question 8
+
+**Title:** Students and Examinations  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/students-and-examinations/)  
+**Platform:** LeetCode  
+**Difficulty:** Medium  
+
+```sql
+MySQL Solution: 
+# Write your MySQL query statement below
+select s.student_id,
+    s.student_name,
+    su.subject_name,
+    count(e.student_id) as attended_exams 
+from Students s cross join subjects su
+left join  Examinations  e
+on su.subject_name =e.subject_name  
+and s.student_id=e.student_id
+group by s.student_id,
+    s.student_name,
+    su.subject_name
+order by s.student_id,
+    su.subject_name
+
+```
+## 🧩 Question 9
+
+**Title:** Bank Account Summary II  
+**Link:** [🔗 Click to Open Problem]()  
+**Platform:** Leetcode  
+**Difficulty:** Easy  
+
+```sql
+MySQL Solution: 
+# Write your MySQL query statement below
+select u.name,
+    sum(amount) as balance
+from Users u 
+join Transactions t
+on u.account=t.account
+group by u.name 
+having balance >10000
+```
+## 🧩 Question 10
+
+**Title:** Employees Whose Manager Left the Company   
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/employees-whose-manager-left-the-company/description/)  
+**Platform:** Leetcode  
+**Difficulty:** Easy  
+
+```sql
+MySQL Solution: 
+# Write your MySQL query statement below
+select employee_id
+from Employees e
+where salary<30000 
+and manager_id is not null and manager_id not in (
+    select employee_id
+    from Employees
+)
+order by employee_id
 
 ```
 

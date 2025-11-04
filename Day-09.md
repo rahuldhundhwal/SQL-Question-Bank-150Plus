@@ -150,59 +150,120 @@ order by days_as_subscriber  desc,user_id
 ```
 ## 🧩 Question 6
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Customer Who Visited but Did Not Make Any Transactions  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions/submissions/1820185648/)  
 **Platform:** LeetCode  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
-
+# Write your MySQL query statement below
+select customer_id,
+    count(visit_id) as count_no_trans
+from Visits
+where visit_id not in (
+    select visit_id from Transactions
+)
+group by customer_id
 ```
 ## 🧩 Question 7
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** DNA Pattern Recognition   
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/dna-pattern-recognition/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+# Write your MySQL query statement below
+SELECT
+    sample_id,
+    dna_sequence,
+    species,
+    case  when dna_sequence LIKE 'ATG%' then 1 else 0 end as has_start,
+    case  when dna_sequence LIKE '%TGA' or dna_sequence LIKE '%TAA' or dna_sequence LIKE '%TAG' then 1 else 0 end as has_stop,
+    case  when dna_sequence LIKE '%ATAT%' then 1 else 0 end as has_atat,
+    case  when dna_sequence LIKE '%GGG%' then 1 else 0 end as has_ggg    
+FROM
+    Samples
+
+ORDER BY
+    sample_id ASC;
 
 
 ```
 ## 🧩 Question 8
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Rearrange Products Table   
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/rearrange-products-table/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
-
+select product_id, "store1" as store,store1 as price 
+from Products where store1 is not null
+union all
+select product_id, "store2" as store,store2 as price 
+from Products where store2 is not null
+union all
+select product_id, "store3" as store,store3 as price 
+from Products where store3 is not null
 ```
 ## 🧩 Question 9
 
-**Title:**  
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** Datalemur  
-**Difficulty:** Medium  
+**Title:** Human Traffic of Stadium 
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/human-traffic-of-stadium/submissions/1820200435/)  
+**Platform:** LeetCode  
+**Difficulty:** Hard  
 
 ```sql
 MySQL Solution: 
+select 
+    a.*
+from Stadium a 
+join Stadium b
+on a.id +1 = b.id
+join stadium c
+on a.id+2=c.id
+where a.people>=100 and b.people>=100 and c.people>=100
+union
+ select 
+    b.*
+from Stadium a 
+join Stadium b
+on a.id +1 = b.id
+join stadium c
+on a.id+2=c.id
+where a.people>=100 and b.people>=100 and c.people>=100
+union 
+select 
+    c.*
+from Stadium a 
+join Stadium b
+on a.id +1 = b.id
+join stadium c
+on a.id+2=c.id
+where a.people>=100 and b.people>=100 and c.people>=100
+
+order by visit_date asc
 
 ```
 ## 🧩 Question 10
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** DataLemur  
+**Title:** Find Followers Count  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/find-followers-count/description/)  
+**Platform:** Leetcode  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
-
+# Write your MySQL query statement below
+select user_id,
+    count(follower_id) as followers_count
+from Followers
+group by user_id
+order by user_id asc
 
 ```
 

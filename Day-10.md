@@ -161,14 +161,24 @@ MySQL Solution:
 ```
 ## 🧩 Question 10
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Primary Department for Each Employee  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/primary-department-for-each-employee/description/)  
 **Platform:** DataLemur  
 **Difficulty:** Easy  
 
 ```sql
 MySQL Solution: 
-
+# Write your MySQL query statement below
+select employee_id,
+    department_id
+from Employee 
+where primary_flag = "Y"
+    or employee_id in(
+        select employee_id
+        from employee 
+        group by employee_id
+        having count(distinct department_id) =1
+    )
 
 ```
 

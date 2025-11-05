@@ -76,24 +76,42 @@ order by user_id
 ```
 ## 🧩 Question 4
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Find Golden Hour Customers  
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/find-golden-hour-customers/description/)  
 **Platform:** LeetCode  
 **Difficulty:** Medium 
 
 ```sql
 MySQL Solution: 
-
+# Write your MySQL query statement below
+SELECT customer_id, COUNT(order_id) total_orders, 
+ROUND(COUNT(CASE WHEN TIME_FORMAT(order_timestamp, '%H:%i') BETWEEN '11:00' AND '14:00' OR
+TIME_FORMAT(order_timestamp, '%H:%i') BETWEEN '18:00' AND '21:00' THEN 1 ELSE NULL END) /
+COUNT(order_id) * 100 , 0) peak_hour_percentage ,
+ROUND(AVG(order_rating),2) average_rating 
+FROM restaurant_orders
+GROUP BY customer_id
+HAVING total_orders > 2 AND peak_hour_percentage >= 60
+AND average_rating >= 4.0 AND COUNT(order_rating) / COUNT(COALESCE(order_rating,1)) >= 0.5
+ORDER BY average_rating DESC, customer_id DESC;
 ```
 ## 🧩 Question 5
 
-**Title:** 
-**Link:** [🔗 Click to Open Problem]()  
+**Title:**Second Day Confirmation
+TikTok SQL Interview Question 
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/second-day-confirmation)  
 **Platform:** LeetCode  
-**Difficulty:** Medium 
+**Difficulty:** Easy 
 
 ```sql
 MySQL Solution: 
+select user_id from emails e 
+where DATE_ADD(e.signup_date, INTERVAL 1 DAY)= (
+ select action_date
+ from texts 
+ where signup_action="Confirmed"
+ and email_id=e.email_id
+)
 
 ```
 ## 🧩 Question 6
@@ -120,15 +138,23 @@ group by machine_id
 ```
 ## 🧩 Question 7
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:**Exchange Seats   
+**Link:** [🔗 Click to Open Problem](https://leetcode.com/problems/exchange-seats/description/?envType=problem-list-v2&envId=database)  
 **Platform:** LeetCode  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
 
-
+select 
+    case 
+        when id%2=1 and id+1 in (select id from seat) then id+1
+        when id%2=0 and id-1 in (select id from seat) then id-1
+        else id
+        end as id,
+    student
+from seat
+order by id 
 ```
 ## 🧩 Question 8
 
@@ -150,13 +176,20 @@ order by employee_id
 ```
 ## 🧩 Question 9
 
-**Title:**  
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** App Click-through Rate (CTR) 
+**Link:** [🔗 Click to Open Problem](https://datalemur.com/questions/click-through-rate)  
 **Platform:** Datalemur  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+select 
+      app_id,
+      round(sum(case when event_type='click' then 1 else 0 end)*100.0/
+      sum(case when event_type='impression' then 1 else 0 end),2) as ctr 
+from events
+where EXTRACT(YEAR from TIMESTAMP)='2022'
+group by app_id
 
 ```
 ## 🧩 Question 10

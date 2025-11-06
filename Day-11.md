@@ -77,70 +77,183 @@ from contacts
 ```
 ## 🧩 Question 5
 
-**Title:** 
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
+**Title:** Highest Salary In Department. - MySQL
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/usa1lt7lf46a?admin-course-hash=2g7by720foge)  
+**Platform:** Newton School  
 **Difficulty:** Medium 
 
 ```sql
 MySQL Solution: 
-
+select 
+    department,
+    first_name as employee_name,
+    salary
+from employee e1
+where salary =(
+    select max(salary) 
+    from employee 
+    where department =e1.department
+)
+order by salary desc
 ```
 ## 🧩 Question 6
 
 **Title:** Biggest Single Num  
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
-**Difficulty:** Easy  
-
-```sql
-MySQL Solution: 
-
-```
-## 🧩 Question 7
-
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/gq7rc45wymwo?admin-course-hash=2g7by720foge)  
+**Platform:** Newton  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+with my_helper as (
+    select date,
+    consumption
+    from fb_eu_energy
 
+    union all
+    
+    select date,
+    consumption
+    from fb_asia_energy
+
+    union all
+    
+    select date,
+    consumption
+    from fb_na_energy
+)
+
+select date,
+    sum(consumption) as total_energy 
+from my_helper e
+group by date 
+having  total_energy  = (
+    select 
+    (sum(consumption)) as total_enery
+    from my_helper
+    group by date 
+    order by total_enery desc
+    limit 1
+)
+
+order by date 
+```
+## 🧩 Question 7
+
+**Title:** Developers project assignments  
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/ksx84flc81q4?admin-course-hash=2g7by720foge)  
+**Platform:** Newton  
+**Difficulty:** Medium  
+
+```sql
+MySQL Solution: 
+select 
+    distinct developer_id,
+case
+    when developer_id in(
+        select developer_id
+        from CompanyA_developers
+    ) then "CompanyA" 
+    when developer_id in(
+        select developer_id
+        from CompanyB_developers
+    ) then "CompanyB"
+    end as status
+from project_assignments
+where developer_id not in (
+    select a.developer_id
+    from CompanyA_developers a
+    join CompanyB_developers b
+on a.developer_id=b.developer_id
+)
+order by developer_id
 
 ```
 ## 🧩 Question 8
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** LeetCode  
+**Title:** 
+Customers with Specific Brands - MySQL   
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/9yj38a62q5oq?admin-course-hash=2g7by720foge)  
+**Platform:** Newton  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+select 
+    customer_id 
+from facebook_sales fs
+join facebook_products fp
+on fs.product_id=fp.product_id
+where brand_name = "Fort West"
+intersect
+select 
+    customer_id 
+from facebook_sales fs
+join facebook_products fp
+on fs.product_id=fp.product_id
+where brand_name = "Golden"
 
+order by customer_id
 ```
 ## 🧩 Question 9
 
-**Title:**  
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** Datalemur  
+**Title:** Authors publishing every month 
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/0t86210aumyl?admin-course-hash=2g7by720foge)  
+**Platform:** Newton  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
-
+select 
+    a.AuthorName,
+case 
+    when count(distinct extract(Year_month from p.PublicationDate)) >= 8 then "Prolific Authors"
+    when count(distinct extract(year_month from p.PublicationDate)) <= 7 and count(distinct extract(year_month from p.PublicationDate))>=4 then "Active Authors"
+    when count(distinct extract(year_month from p.PublicationDate)) < 4 then "Occasional Authors"
+    end as Category
+from authors a join Publications p 
+on a.authorId=p.authorID
+where p.Genre ="Fiction"
+group by a.authorid
+having count(p.publicationID)>=1
+order by a.AuthorName
 ```
 ## 🧩 Question 10
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
-**Platform:** DataLemur  
-**Difficulty:** Easy  
+**Title:** 
+Frequent Travellers-1   
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/rw5tbs81z5bm?admin-course-hash=2g7by720foge)  
+**Platform:** Newton  
+**Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+select * 
+from travel_history t
+where 3 <= (
+    select count(distinct end_city)
+    from travel_history 
+    where t.traveler =traveler
 
+)
+and 
+date in (
+    select min(date) 
+    from travel_history
+    where traveler=t.traveler and end_city in(
+        select distinct end_city
+        from travel_history 
+        where t.traveler =traveler  
+    )
+    group by end_city
+
+)
+and end_city in(
+        select distinct end_city
+        from travel_history 
+        where t.traveler =traveler  
+)
+order by traveler,date,start_city
 
 ```
 

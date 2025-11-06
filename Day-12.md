@@ -153,44 +153,124 @@ order by i.product_id asc
 ```
 ## 🧩 Question 7
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Department and salary range   
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/4n7uoiby6iap?admin-course-hash=2g7by720foge)  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+select 
+    d.DepartmentName,
+    avg(e.salary) as AverageSalary,
+    count(e.EmployeeID) as TotalEmployees,
+    round(max(e.salary),2) as HighestSalary,
+    round(min(e.salary),2) as LowestSalary,
+    round(sum(case when salary>70000 then 1 else 0 end)*100.0/
+    count(e.EmployeeID),2) as PercentageOver70K,
+    round(max(e.salary)-min(e.salary),2) as SalaryRange
+from departments d 
+join Employees e
+on d.departmentid =e.departmentId
+group by d.departmentid
+having  AverageSalary > 50000 
+and TotalEmployees>=5
+and SalaryRange >30000
+order by d.departmentname asc
 
 
 ```
 ## 🧩 Question 8
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:**Greater than average salary
+   
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/aa5me84exnq0?admin-course-hash=2g7by720foge)  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
-
+select 
+    name 
+from
+    Students 
+where student_id in (
+    select student_id 
+    from jobs
+    where salary > (
+        select avg(salary)
+        from jobs
+        where student_id in(
+            select student_id
+            from Students 
+            where department_id =(
+                select distinct department_id 
+                from Departments
+                where dept_name="CSE"
+            ) 
+        )
+    )
+)
+order by name asc
 ```
 ## 🧩 Question 9
 
-**Title:**  
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Twitter  
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/zk5l5cf6gp26?admin-course-hash=2g7by720foge)  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
-
+select user_id
+from user_topics
+where topic_id not in (
+    select topic_id
+    from topic_rankings
+    where ranking <=100
+    and ranking_date = "2021/01/01"
+)
+and follow_date="2021/01/01"
 ```
 ## 🧩 Question 10
 
-**Title:**   
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Top Rated Models  
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/26cjen9uahb2?admin-course-hash=2g7by720foge)  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
+with agencyStats as (
+    select  
+        a.agency,
+        count(a.model_id) total_models,
+        round(coalesce(avg(rating),0),2) as average_rating,
+        coalesce(count(assignment_id),0) as total_assignments
+    from models a left join assignments m 
+    on a.model_id=m.model_id
+    group by a.agency
 
+),
+modelStats as(
+    select 
+        m.model_id,
+        m.agency,
+        coalesce(avg(rating),0) as avg_rating,
+        coalesce(count(assignment_id),0) as total_assignments
+    from models m left join assignments a
+    on m.model_id=a.model_id
+    group by m.model_id 
+    having avg_rating >4.5
+)
+
+select 
+    a.agency,
+    a.average_rating,
+    a.total_assignments
+from agencyStats a
+join modelStats m 
+on a.agency=m.agency
+group by a.agency
+having a.average_rating>4.5 and 
+    total_assignments>10
+    and count(m.model_id)*1.0 >=0.7*(select count(model_id) from models where a.agency=agency)
 
 ```
 

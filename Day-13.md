@@ -251,13 +251,23 @@ order by p.product_id
 ```
 ## 🧩 Question 10
 
-**Title:** Top Rated Models  
-**Link:** [🔗 Click to Open Problem]()  
+**Title:** Identifying Top Performers in Each Category  
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/roq799wrlvgr)  
 **Difficulty:** Medium  
 
 ```sql
 MySQL Solution: 
-
+select 
+    category_id,
+    product_id,
+    sales
+from products p
+where sales = (
+    select max(sales)
+    from products 
+    where category_id=p.category_id
+)
+order by sales desc
 
 ```
 

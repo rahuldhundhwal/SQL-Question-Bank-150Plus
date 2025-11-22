@@ -93,36 +93,71 @@ order by total_beds desc, host_id asc
 ```
 ## 🧩 Question 5
 
-**Title:** 
+**Title:** Monthly Percentage
    
-**Link:** [🔗 Click to Open Problem]()  
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/8l97b7gn7fk1)  
 **Difficulty:** Medium 
 
 ```sql
 MySQL Solution:
+with helper as (
+    select
+        date_format(created_at,"%Y-%m") as ym,
+        sum(value) as revenue
+    from purchases
+    group by date_format(created_at,"%Y-%m")
+)
+select 
+    ym,
+    round((revenue-lag(revenue)over(order by ym))*100/lag(revenue)over(order by ym),2) as revenue_diff_pct
+from helper
+order by ym
  
 ```
 ## 🧩 Question 6
 
-**Title:** 
+**Title:** SQL- Ranking System - MySQL
    
-**Link:** [🔗 Click to Open Problem]()  
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/o7v67dp2acjn)  
 **Difficulty:** Medium 
 
 ```sql
 MySQL Solution:
- 
+ select 
+    player_name,
+    country,
+    runs_scored,
+case
+    when  rank() over(order by runs_Scored desc) =1 then "Top Scorer"
+    when  rank() over(order by runs_Scored desc)  between 2 and 5 then "High Scorer"
+    when  rank() over(order by runs_Scored desc)  >=6 then "Moderate Scorer"
+    end as scoring_rank
+from cricketPLayer
+where runs_scored>5000
+order by runs_scored desc,player_name asc
 ```
 ## 🧩 Question 7
 
-**Title:** 
+**Title:** Histogram of Users and Purchases
    
-**Link:** [🔗 Click to Open Problem]()  
+**Link:** [🔗 Click to Open Problem](https://my.newtonschool.co/playground/database/sodmtkgyqnlt)  
 **Difficulty:** Medium 
 
 ```sql
 MySQL Solution:
- 
+select 
+    transaction_date,
+    user_id,
+    count(product_id) as purchase_count
+from user_transactions t
+where transaction_date=(
+    select 
+        max(transaction_date)
+    from user_transactions
+    where t.user_id=user_id
+)
+group by user_id,transaction_date
+order by max(transaction_date) asc
 ```
 ## 🧩 Question 8
 
